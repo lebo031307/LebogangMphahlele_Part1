@@ -25,7 +25,7 @@ public class LebogangMphahlele_Part1 {
         lastName = input.nextLine();
 
         // Get and validate username
-        System.out.print("Enter your username: ");
+        System.out.println("Enter your username: ");
         username = input.nextLine();
 
         while (!Login.checkUserName(username)) {
@@ -33,13 +33,13 @@ public class LebogangMphahlele_Part1 {
                     + "please ensure that your username contains an "
                     + "underscore and is no more than five characters "
                     + "in length.");
-            System.out.print("Enter your username again: ");
+            System.out.println("Enter your username again: ");
             username = input.nextLine();
         }
         System.out.println("Username successfully captured.");
 
         // Get and validate password
-        System.out.print("Enter your password: ");
+        System.out.println("Enter your password: ");
         password = input.nextLine();
 
         while (!Login.checkPasswordComplexity(password)) {
@@ -47,20 +47,20 @@ public class LebogangMphahlele_Part1 {
                     + "please ensure that the password contains at "
                     + "least eight characters, a capital letter, "
                     + "a number, and a special character.");
-            System.out.print("Enter your password again: ");
+            System.out.println("Enter your password again: ");
             password = input.nextLine();
         }
         System.out.println("Password successfully captured.");
 
         // Get and validate cellphone number
-        System.out.print("Enter your cellphone number: ");
+        System.out.println("Enter your cellphone number: ");
         cellPhone = input.nextLine();
 
         while (!Login.checkCellPhoneNumber(cellPhone)) {
             System.out.println("Cell number is incorrectly formatted "
                     + "or does not contain an international code; "
                     + "please correct the number and try again");
-            System.out.print("Enter your cellphone number again: ");
+            System.out.println("Enter your cellphone number again: ");
             cellPhone = input.nextLine();
         }
         System.out.println("Cell number successfully captured.");
@@ -75,7 +75,7 @@ public class LebogangMphahlele_Part1 {
         System.out.println();
         System.out.println("===== Login =====");
 
-        System.out.print("Enter your username: ");
+        System.out.println("Enter your username: ");
         String enteredUsername = input.nextLine();
 
         System.out.println("Enter your password: ");
