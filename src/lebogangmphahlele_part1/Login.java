@@ -36,6 +36,7 @@ public class Login {
         return hasCapitalLetter && hasNumber && hasSpecialCharacter;
     }
 
+    // Add cellphone number validation
     // Check South African cellphone number using Regex.
     // Regex reference: W3Schools Java Regular Expressions
     public static boolean checkCellPhoneNumber(String cellPhone) {
