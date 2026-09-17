@@ -3,6 +3,8 @@ package lebogangmphahlele_part1;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+// Unit tests verifying registration and login validation methods
+
 public class LoginTest {
 
     @Test
