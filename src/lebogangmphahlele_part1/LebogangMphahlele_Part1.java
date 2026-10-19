@@ -33,7 +33,7 @@ public class LebogangMphahlele_Part1 {
                     + "please ensure that your username contains an "
                     + "underscore and is no more than five characters "
                     + "in length.");
-            System.out.print("Enter your username again: ");
+            System.out.println("Enter your username again: ");
             username = input.nextLine();
         }
         System.out.println("Username successfully captured.");
@@ -47,7 +47,7 @@ public class LebogangMphahlele_Part1 {
                     + "please ensure that the password contains at "
                     + "least eight characters, a capital letter, "
                     + "a number, and a special character.");
-            System.out.print("Enter your password again: ");
+            System.out.println("Enter your password again: ");
             password = input.nextLine();
         }
         System.out.println("Password successfully captured.");
@@ -60,7 +60,7 @@ public class LebogangMphahlele_Part1 {
             System.out.println("Cell number is incorrectly formatted "
                     + "or does not contain an international code; "
                     + "please correct the number and try again");
-            System.out.print("Enter your cellphone number again: ");
+            System.out.println("Enter your cellphone number again: ");
             cellPhone = input.nextLine();
         }
         System.out.println("Cell number successfully captured.");

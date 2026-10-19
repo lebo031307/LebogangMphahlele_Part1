@@ -8,7 +8,8 @@ public class Login {
         return username.contains("_") && username.length() <= 5;
     }
 
-    // Check password complexity
+    // Add password complixity validation
+    // Check password complexity 
     public static boolean checkPasswordComplexity(String password) {
         if (password.length() < 8) {
             return false;
@@ -35,6 +36,7 @@ public class Login {
         return hasCapitalLetter && hasNumber && hasSpecialCharacter;
     }
 
+    // Add cellphone number validation
     // Check South African cellphone number using Regex.
     // Regex reference: W3Schools Java Regular Expressions
     public static boolean checkCellPhoneNumber(String cellPhone) {
