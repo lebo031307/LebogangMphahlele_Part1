@@ -10,9 +10,6 @@ jobs:
       - name: Get the code
         uses: actions/checkout@v4
 
-      - name: Show the files
-        run: find . -not -path "./.git/*" -type f
-
       - name: Set up Java 8
         uses: actions/setup-java@v4
         with:
@@ -29,4 +26,4 @@ jobs:
       - name: Run the unit tests
         run: |
           CP=$(find . -name "*.jar" | tr '\n' ':')
-          java -cp "out:$CP" org.junit.runner.JUnitCore lebogangmphahlele_part1.LoginTest lebogangmphahlele_part1.MessageTe
+          java -cp "out:$CP" org.junit.runner.JUnitCore lebogangmphahlele_part1.LoginTest lebogangmphahlele_part1.MessageTest
