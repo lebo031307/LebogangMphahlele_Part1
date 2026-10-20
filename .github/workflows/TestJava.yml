@@ -7,22 +7,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get the code
-      uses: actions/checkout@v4
+      - name: Get the code
+        uses: actions/checkout@v4
 
-    - name: Set up Java 8
-      uses: actions/setup-java@v4
-      with:
-        distribution: temurin
-        java-version: 8
+      - name: Show the files
+        run: find . -not -path "./.git/*" -type f
 
-    - name: Compile the code and the tests
-      run: |
-        mkdir -p out
-        javac -cp "lib/" -d out src/lebogangmphahlele_part1/.java test/lebogangmphahlele_part1/*.java
+      - name: Set up Java 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 8
 
-    - name: Run the unit tests
-      run: |
-        java -cp "out:lib/*" org.junit.runner.JUnitCore \
-          lebogangmphahlele_part1.LoginTest \
-          lebogangmphahlele_part1.MessageTest
+      - name: Compile the code and the tests
+        run: |
+          mkdir -p out
+          find . -name "*.java" > sources.txt
+          CP=$(find . -name "*.jar" | tr '\n' ':')
+          javac -cp "$CP" -d out @sources.txt
+
+      - name: Run the unit tests
+        run: |
+          CP=$(find . -name "*.jar" | tr '\n' ':')
+          java -cp "out:$CP" org.junit.runner.JUnitCore lebogangmphahlele_part1.LoginTest lebogangmphahlele_part1.MessageTe
