@@ -226,6 +226,21 @@ public class StoredMessages {
         return -1;
     }
 
+    // Looks for a stored message that has the given hash and returns its
+    // index. Sent and disregarded messages are ignored. Returns -1 if no
+    // stored message has the hash.
+    private static int findStoredIndexByHash(String hash) {
+
+        for (int i = 0; i < messageHashes.size(); i++) {
+            if (messageFlags.get(i).equals(STORED)
+                    && messageHashes.get(i).equals(hash)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    
     /**
      * Searches all messages (sent, stored and disregarded) for a message ID.
      *
@@ -328,27 +343,27 @@ public class StoredMessages {
     }
 
     /**
-     * Deletes the message that has the given hash from the arrays. If it was a
-     * stored message, the JSON file is updated as well. If two messages have
-     * the same hash, only the first one is deleted.
+     * Deletes the stored message that has the given hash from the arrays and
+     * from the JSON file. Sent and disregarded messages cannot be deleted
+     * this way. If two stored messages have the same hash, only the first one
+     * is deleted.
      *
-     * @param hash the message hash of the message to delete
+     * @param hash the message hash of the stored message to delete
      * @return a sentence that says what happened
      */
     public static String deleteMessageByHash(String hash) {
 
-        int index = findIndex(messageHashes, hash);
+        int index = findStoredIndexByHash(hash);
 
         if (index == -1) {
-            return "Message hash not found.";
+            return "No stored message has that hash.";
         }
 
         String deletedText = messageTexts.get(index);
-        boolean wasStored = messageFlags.get(index).equals(STORED);
 
         removeEntry(index);
 
-        if (wasStored && !writeStoredMessages()) {
+        if (!writeStoredMessages()) {
             return "The message was deleted, but the JSON file could not be updated.";
         }
 
