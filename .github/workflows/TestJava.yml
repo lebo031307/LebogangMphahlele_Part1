@@ -26,4 +26,4 @@ jobs:
       - name: Run the unit tests
         run: |
           CP=$(find . -name "*.jar" | tr '\n' ':')
-          java -cp "out:$CP" org.junit.runner.JUnitCore lebogangmphahlele_part1.LoginTest lebogangmphahlele_part1.MessageTest
+          java -cp "out:$CP" org.junit.runner.JUnitCore lebogangmphahlele_part1.LoginTest lebogangmphahlele_part1.MessageTest lebogangmphahlele_part1.StoredMessagesTest
