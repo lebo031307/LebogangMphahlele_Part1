@@ -2,3 +2,5 @@ build/
 dist/
 nbproject/private/
 messages.json
+messages_test.json
+*.class
