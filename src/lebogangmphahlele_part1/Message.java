@@ -88,9 +88,10 @@ public class Message {
     }
 
     /**
-     * Checks the recipient's South African international number.
-     * The +27 replaces the leading 0, so the number must be +27 followed by
-     * 9 digits.
+     * Checks the recipient's South African cell number. The number must be
+     * +27 followed by 9 digits (the +27 replaces the leading 0), or the local
+     * form: 0 followed by 9 digits, for example 0838884567. The Part 3 test
+     * data uses the local form for message 4.
      *
      * @param recipient the cell number to check
      * @return a sentence that says if the number is correct or not
@@ -98,7 +99,7 @@ public class Message {
     public static String checkRecipientCell(String recipient) {
 
         if (recipient != null
-                && recipient.matches("^\\+27[0-9]{9}$")) {
+                && recipient.matches("^(\\+27|0)[0-9]{9}$")) {
 
             return "Cell phone number successfully captured.";
         } else {
