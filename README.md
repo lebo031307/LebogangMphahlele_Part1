@@ -124,3 +124,104 @@ Run MessageTest.java in NetBeans (right-click, Test File). The tests cover messa
  * Farrell, J. (2019) Java Programming. 9th edn. Boston: Cengage Learning.
  * W3Schools (n.d.) Java Tutorial. Available at: https://www.w3schools.com/java/ (Accessed: 17 October 2026).
  * W3Schools (n.d.) Java Create and Write To Files. Available at: https://www.w3schools.com/java/java_files_create.asp (Accessed: 17 October 2026
+
+# QuickChat - PROG5121 POE (Parts 1, 2 and 3)
+
+## About the project
+
+QuickChat is a Java console application built in three parts. Every part adds
+to the same project, so the final version has Part 1, Part 2 and Part 3 working
+together: the user registers, logs in, sends messages, and then works with the
+stored messages.
+
+## How the project grew
+
+### Part 1 - Registration and login
+- The user enters a first name, last name, username, password and cell number.
+- The username must contain an underscore and be at most five characters.
+- The password must have at least eight characters, a capital letter, a number
+  and a special character.
+- The cell number must be +27 followed by nine digits (checked with a regex).
+- The user then logs in and gets a welcome or an error message.
+- LoginTest checks each of these methods.
+
+### Part 2 - QuickChat messaging
+- QuickChat only starts after a successful login and shows "Welcome to QuickChat."
+- The user sets how many messages to enter, once, when QuickChat starts.
+- A numeric menu runs in a while loop: 1 Send Messages, 2 Show recently sent
+  messages, 3 Quit.
+- A for loop handles each message. The loop counter is the message number.
+- Each message has a recipient check, a 250-character limit, a random ten-digit
+  ID built in a loop, and a hash such as 00:0:HITONIGHT.
+- The user can send, disregard or store each message. Stored messages are
+  written to messages.json.
+- MessageTest checks the Message class methods.
+
+### Part 3 - Arrays, stored messages and reports
+- Every message is kept in arrays, and a new fourth main menu option, Stored
+  Messages, lets the user search, delete and report on them.
+
+## What changed from Parts 1 and 2, and why
+
+| Area | In Parts 1 and 2 | In Part 3 | Why |
+|---|---|---|---|
+| Where messages are kept | The Message class had its own lists and a counter | The new StoredMessages class keeps parallel arrays (ID, hash, recipient, text, flag) and sent, disregarded and stored arrays. Message now uses them | One place for the data, so searching and deleting never leave a second copy behind |
+| Main menu option 2 | Showed "Coming Soon." | Shows a report of all sent messages | The feature the Part 2 brief described as still in development is now finished |
+| Main menu option 4 | Did not exist | Stored Messages menu with six actions | Required by Part 3 |
+| JSON file | Only written. Each run saved only that run's stored messages | Read back into the stored array when QuickChat starts and when the Stored Messages menu opens. Deleting a message updates the file | Stored messages now survive a restart |
+| Disregarded messages | Only displayed "Press 0 to delete the message." | Also saved in the disregarded array for the session | Part 3 needs an array of disregarded messages |
+| Recipient check in Message | +27 followed by nine digits only | Also accepts 0 followed by nine digits | The Part 3 test data uses a local number (0838884567) |
+| Unit tests | LoginTest and MessageTest | Same tests, still passing, plus StoredMessagesTest | Tests the arrays, JSON reading, searches, delete and reports with the POE test data |
+| GitHub Actions | Ran two test classes | Runs LoginTest, MessageTest and StoredMessagesTest. The lib folder also holds json-simple | Reading the JSON file needs the json-simple jar |
+| Comments | Short comments | Every class and method has a comment, and sources are listed | Easier to read and the sources are credited |
+
+Part 1 (registration and login) was not changed.
+
+## Stored Messages menu (main menu option 4)
+When the menu opens, messages.json is read into the stored messages array and
+shown. The user can then:
+1. Display the sender and recipient of all stored messages
+2. Display the longest stored message
+3. Search for a message ID and show the recipient and message
+4. Search for all sent or stored messages for a recipient
+5. Delete a stored message using its message hash
+6. Display a report of all stored messages
+7. Go back to the main menu
+
+## Test data
+| No | Recipient | Message | Action |
+|---|---|---|---|
+| 1 | +27834557896 | Did you get the cake? | Sent |
+| 2 | +27838884567 | Where are you? You are late! I have asked you to be on time. | Stored |
+| 3 | +27834484567 | Yohoooo, I am at your gate. | Disregarded |
+| 4 | 0838884567 | It is dinner time! | Sent |
+| 5 | +27838884567 | Ok, I am leaving without you. | Stored |
+
+## Project structure
+- src/lebogangmphahlele_part1: LebogangMphahlele_Part1.java (main), Login.java,
+  Message.java, StoredMessages.java
+- test/lebogangmphahlele_part1: LoginTest.java, MessageTest.java,
+  StoredMessagesTest.java
+- lib: junit-4.12.jar, hamcrest-core-1.3.jar, json-simple-1.1.jar
+- .github/workflows/TestJava.yml: runs all tests on every push
+
+## How to run
+1. Open the project in NetBeans (JDK 1.8). json-simple-1.1.jar must be in the
+   project Libraries.
+2. Run LebogangMphahlele_Part1.java.
+3. Register, log in, then use the QuickChat menu.
+4. To run the tests, right-click a test file and choose Test File.
+
+## Assumptions
+- The sender of a message is the logged-in user's full name.
+- The recipient search covers sent and stored messages, not disregarded ones.
+- Only stored messages can be deleted by hash. The success message leaves out
+  the final full stop, like the example in the POE.
+- The unit tests use 0838884567 as the ID of message 4 and a placeholder
+  recipient, because the POE gives no recipient for that message.
+
+## References
+- Farrell, J. (n.d.) Java Programming. Cengage.
+- W3Schools (n.d.) Java Tutorial. Available at: https://www.w3schools.com/java/
+- W3Schools (n.d.) Java ArrayList. Available at: https://www.w3schools.com/java/java_arraylist.asp
+- json-simple library. Available at: https://github.com/fangyidong/json-simple
