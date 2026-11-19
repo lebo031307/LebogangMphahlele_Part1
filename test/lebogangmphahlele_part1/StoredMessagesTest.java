@@ -248,8 +248,25 @@ public class StoredMessagesTest {
 
     @Test
     public void testDeleteMessageByHashNotFound() {
-        assertEquals("Message hash not found.",
+        assertEquals("No stored message has that hash.",
                 StoredMessages.deleteMessageByHash("99:9:NOTHERE"));
+    }
+
+    @Test
+    public void testDeleteSentMessageHashIsRejected() {
+        // 00:0:DIDCAKE is the hash of message 1, which was sent (not stored),
+        // so it cannot be deleted and the sent array must stay the same.
+        assertEquals("No stored message has that hash.",
+                StoredMessages.deleteMessageByHash("00:0:DIDCAKE"));
+
+        assertEquals(2, StoredMessages.getSentMessages().size());
+    }
+
+    @Test
+    public void testLocalRecipientNumberIsAccepted() {
+        // The Part 3 test data gives message 4 the local number 0838884567.
+        assertEquals("Cell phone number successfully captured.",
+                Message.checkRecipientCell("0838884567"));
     }
 
     // ---------- Display the report ----------
